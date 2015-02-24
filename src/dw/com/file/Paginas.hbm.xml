@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/02/2015 04:27:53 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="dw.com.file.Paginas" table="paginas" schema="public">
+        <composite-id name="id" class="dw.com.file.PaginasId">
+            <key-property name="urlPagina" type="java.lang.String">
+                <column name="url_pagina" length="100" />
+            </key-property>
+            <key-property name="descripcionPagina" type="java.lang.String">
+                <column name="descripcion_pagina" length="500" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

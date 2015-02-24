@@ -1,0 +1,93 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</h:head>
+
+	<h:body>
+		  <ui:composition template="/WEB-INF/facelets/template.xhtml">	
+		 
+		 	<ui:define name="body">	
+				<f:view>
+					<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>               
+					<p:dialog modal="true" widgetVar="statusDialog" header="Loading"  draggable="false" closable="false">  
+   						<p:graphicImage value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />   
+					</p:dialog>
+		  			<h:form id="frm">								  		
+						
+						<p:panel id="panelDataTablePaginas" header="PaginasData">
+							<p:growl id="men"/>				
+							<p:dataTable value="#{paginasView.data}" var="paginas"
+								paginator="true" rows="5">
+																										<p:column filterBy="#{paginas.urlPagina}" sortBy="#{paginas.urlPagina}" >
+										 <f:facet name="header">
+										<h:outputText value="urlPagina"/>
+										</f:facet>
+										 <h:outputText value="#{paginas.urlPagina}"/>
+										 </p:column>
+			                    										<p:column filterBy="#{paginas.descripcionPagina}" sortBy="#{paginas.descripcionPagina}" >
+										 <f:facet name="header">
+										<h:outputText value="descripcionPagina"/>
+										</f:facet>
+										 <h:outputText value="#{paginas.descripcionPagina}"/>
+										 </p:column>
+			                    																			                    
+								<p:column headerText="Options">
+									<p:commandButton id="btnEdit" icon="ui-icon-pencil"
+										update=":dialogPaginas"
+										actionListener="#{paginasView.action_edit}">
+										<f:attribute name="selectedPaginas" value="#{paginas}" />
+									</p:commandButton>
+									<p:commandButton id="btnDelete"									
+										title="Delete" actionListener="#{paginasView.action_delete_datatable}"
+										onclick="if(!confirm('Do you really want to delete this Entry?')){return false;}"
+										icon="ui-icon-trash" update="@form">
+										<f:attribute name="selectedPaginas" value="#{paginas}" />
+									</p:commandButton>
+								</p:column>									                    
+							</p:dataTable>	
+						</p:panel>
+						<p:panel id="panelBoton">
+							<div align="center">
+								<p:commandButton id="btnNew" value="New"
+									action="#{paginasView.action_new()}" update=":dialogPaginas" />
+							</div>
+						</p:panel>						
+		   			</h:form>
+					<p:dialog id="dialogPaginas" appendToBody="true" draggable="true"
+						closable="false" visible="#{paginasView.showDialog}" resizable="false"
+						modal="true" width="500">
+						<h:form id="formDialog">
+							<p:messages id="msg" showDetail="true"/>
+							<p:panel id="panelPaginas" header="Paginas">							
+							    <h:panelGrid columns="2" id="panelGrid" >
+																		 <h:outputText id="msgUrlPagina" value="UrlPagina"/>
+									 <p:inputText id="txtUrlPagina" binding="#{paginasView.txtUrlPagina}">
+									 <p:ajax update=":dialogPaginas" listener="#{paginasView.listener_txtId}"/>
+									 </p:inputText>	
+																		 <h:outputText id="msgDescripcionPagina" value="DescripcionPagina"/>
+									 <p:inputText id="txtDescripcionPagina" binding="#{paginasView.txtDescripcionPagina}">
+									 <p:ajax update=":dialogPaginas" listener="#{paginasView.listener_txtId}"/>
+									 </p:inputText>	
+																											
+																		
+																    </h:panelGrid>
+							</p:panel>						   
+							<p:panel id="panelBotones">
+								<div align="center">					
+									<p:commandButton id="btnSave" binding="#{paginasView.btnSave}" value="Save" action="#{paginasView.action_save()}" update=":dialogPaginas :frm:panelDataTablePaginas" />
+									<p:commandButton id="btnClear" value="Clear" action="#{paginasView.action_clear()}" update=":dialogPaginas" />
+									<p:commandButton id="btnExit" value="Exit" action="#{paginasView.action_closeDialog()}" update=":dialogPaginas" />
+								</div>
+							</p:panel>					
+						</h:form>
+					</p:dialog>
+				</f:view>
+			</ui:define>		
+		</ui:composition>	
+	</h:body>	
+</html>	

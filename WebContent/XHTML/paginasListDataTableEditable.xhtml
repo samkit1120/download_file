@@ -1,0 +1,76 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</h:head>
+
+	<h:body>
+	    <ui:composition template="/WEB-INF/facelets/template.xhtml">	
+		 
+		 	<ui:define name="body">	
+				<f:view>
+			<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>               
+					<p:dialog modal="true" widgetVar="statusDialog" header="Loading"  draggable="false" closable="false">  
+   						<p:graphicImage value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />   
+					</p:dialog>
+		 
+		 <h:form id="form">
+			
+			 
+			<p:panel id="msgProjectClientesTitle" header="PaginasData">
+					<p:messages id="msg" showDetail="true"/>
+				<p:dataTable id ="tabla" value="#{paginasView.data}" var="paginas"
+					paginator="true" rows="5"  editable="true" >
+					 
+					 <p:ajax event ="rowEdit" update=":form:msg,:form:tabla" listener="#{paginasView.rowEventListener}" />
+					
+															<p:column filterBy="#{paginas.urlPagina}" sortBy="#{paginas.urlPagina}" headerText="urlPagina">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{paginas.urlPagina}"/>
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{paginas.urlPagina}"/>
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+                    					<p:column filterBy="#{paginas.descripcionPagina}" sortBy="#{paginas.descripcionPagina}" headerText="descripcionPagina">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{paginas.descripcionPagina}"/>
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{paginas.descripcionPagina}"/>
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+                    										
+										
+											
+					<p:column headerText="Options" >
+						<p:rowEditor id="row"/>
+						<p:tooltip for="row" value="Edit" showEffect="fade" hideEffect="fade" />
+						<p:tooltip for="btnDelete" value="Delete" showEffect="fade" hideEffect="fade" />
+						<p:commandButton id="btnDelete" actionListener="#{paginasView.actionDeleteDataTableEditable}" title="Delete" onclick="if(!confirm('Do you really want to delete this Entry?')){return false;}" icon="ui-icon-trash" update=":form:msg,:form:tabla" >
+							<f:attribute name="selectedPaginas" value="#{paginas}" />  
+						</p:commandButton>
+						
+					</p:column>	
+				
+				</p:dataTable>	
+					
+				
+			</p:panel>
+				
+	   </h:form>
+		 </f:view>
+			</ui:define>		
+		</ui:composition>	
+	
+	</h:body>	
+	
+</html>	

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee"
+ xmlns:xi="http://www.w3.org/2001/XInclude"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+
+    <application>
+      <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+    </application>	
+	
+  
+            <navigation-rule>
+            <from-view-id>/XHTML/paginas.xhtml</from-view-id>
+            <navigation-case>
+                <from-outcome>goInitialMenu</from-outcome>
+                <to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+                <redirect />
+            </navigation-case>
+        </navigation-rule>
+        <navigation-rule>
+            <from-view-id>/XHTML/paginasListDataTable.xhtml</from-view-id>
+            <navigation-case>
+                <from-outcome>goInitialMenu</from-outcome>
+                <to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+                <redirect />
+            </navigation-case>
+        </navigation-rule>
+        <navigation-rule>
+            <from-view-id>/XHTML/paginasListDataTableEditable.xhtml</from-view-id>
+            <navigation-case>
+                <from-outcome>goInitialMenu</from-outcome>
+                <to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+                <redirect />
+            </navigation-case>
+        </navigation-rule>
+        <navigation-rule>
+            <from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+            <navigation-case>
+                <from-outcome>goPaginas</from-outcome>
+                <to-view-id>/XHTML/paginas.xhtml</to-view-id>
+                <redirect />
+            </navigation-case>
+        </navigation-rule>
+        <navigation-rule>
+            <from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+            <navigation-case>
+                <from-outcome>goPaginasListDataTable</from-outcome>
+                <to-view-id>/XHTML/paginasListDataTable.xhtml</to-view-id>
+                <redirect />
+            </navigation-case>
+        </navigation-rule>
+        <navigation-rule>
+            <from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+            <navigation-case>
+                <from-outcome>goPaginasListDataTableEditable</from-outcome>
+                <to-view-id>/XHTML/paginasListDataTableEditable.xhtml</to-view-id>
+                <redirect />
+            </navigation-case>
+        </navigation-rule>
+    </faces-config>
