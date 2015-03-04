@@ -411,11 +411,8 @@ public class PaginasView implements Serializable {
  				nombre = sheet.getCell(columna, fila).getContents();
  				
  				// imprimir nombre
- 				listaCaciones.add(nombre);
- 				//System.out.print(nombre + ""); 
+ 				listaCaciones.add(nombre); 
  			} 			
-// 			System.out.println("\n");
-// 			System.out.println("————————————-");
  		}
 		
 	}
@@ -450,7 +447,6 @@ public class PaginasView implements Serializable {
                     switch (cell.getCellType()) {
                     case Cell.CELL_TYPE_STRING:
                     	listaCaciones.add(cell.getStringCellValue());
-//                        System.out.print(cell.getStringCellValue() + "\t");
                         break;
                     case Cell.CELL_TYPE_NUMERIC:
 //                        System.out.print(cell.getNumericCellValue() + "\t");
@@ -462,7 +458,6 @@ public class PaginasView implements Serializable {
                  
                     }
                 }
-                System.out.println("");
             }
             
             file.delete();
@@ -488,11 +483,7 @@ public class PaginasView implements Serializable {
     	
     	//leer el texto para un .docx
     	listaCaciones.add(xwpf_we.getText());
-    	String texto = xwpf_we.getText(); 
-    	System.out.println(texto);
-
-    	//se imprime 
-    	System.out.println(listaCaciones); 
+    	String texto = xwpf_we.getText();  
     }
     
     public void readWordDOC(File file) throws IOException{
@@ -509,13 +500,8 @@ public class PaginasView implements Serializable {
     	
     	//Leemos y guardamos en un String
     	listaCaciones.add(we.getText());
-    	String texto = we.getText();
-    		
-    	//Lo imprimimos para probar
-    	System.out.print(listaCaciones); 
-    }
-    
-    
+    	String texto = we.getText(); 
+    }    
 
     public InputText getTxtUrlPagina() {
         return txtUrlPagina;
